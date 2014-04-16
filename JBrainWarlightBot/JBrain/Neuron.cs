@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JBrainWarlightBot.JBrain
 {
-    class Neuron
+    class Neuron //This thing should be capable of learning
     {
         private Neuron[] inputs;
         private double[] weights;

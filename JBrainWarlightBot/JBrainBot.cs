@@ -9,7 +9,7 @@ namespace JBrainWarlightBot
     using JBrain;
     using Moves;
 
-    class JBrainBot : IBot
+    class JBrainBot : IBot //This class desperately calls for rewriting... From scratch
     {
         private JBrainNetwork brain;
 

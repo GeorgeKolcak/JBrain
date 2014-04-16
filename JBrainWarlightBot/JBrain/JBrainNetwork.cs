@@ -13,7 +13,7 @@ namespace JBrainWarlightBot.JBrain
         private Neuron[][] neuronLayers;
         private InputNeuron[] inputNeurons;
 
-        public JBrainNetwork(Map map, int extraLayers, int toroidSize)
+        public JBrainNetwork(Map map, int extraLayers, int toroidSize) //Constructor needs rewriting... From scratch
         {
             neuronLayers = new Neuron[3 + extraLayers][];
 
