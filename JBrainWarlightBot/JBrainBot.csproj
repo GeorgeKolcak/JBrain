@@ -44,11 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FictiveMove.cs" />
+    <Compile Include="FictiveRegion.cs" />
     <Compile Include="JBrainBot.cs" />
     <Compile Include="JBrain\InputNeuron.cs" />
     <Compile Include="JBrain\JBrainNetwork.cs" />
     <Compile Include="JBrain\Neuron.cs" />
     <Compile Include="JBrain\OutputNeuron.cs" />
+    <Compile Include="OpponentMockBot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

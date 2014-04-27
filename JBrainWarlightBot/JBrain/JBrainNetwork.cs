@@ -41,11 +41,14 @@ namespace JBrainBot.JBrain
 
             outputNeuron.Compute();
 
-            outputNeuron.UpdateWeights(learningRate, lambda, formerPrediction);
-
-            formerPrediction = outputNeuron.Value;
-
             return outputNeuron.Value;
+        }
+
+        public void NextMove(double prediction)
+        {
+            outputNeuron.UpdateWeights(learningRate, lambda, formerPrediction, prediction);
+
+            formerPrediction = prediction;
         }
     }
 }
