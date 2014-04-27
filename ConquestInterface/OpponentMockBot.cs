@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JBrainWarlightBot
+namespace ConquestInterface
 {
-    class OpponentMockBot : BotCommunicationInterface
+    public class OpponentMockBot : BotCommunicationInterface
     {
         public OpponentMockBot(string id)
             : base(id, null) { }

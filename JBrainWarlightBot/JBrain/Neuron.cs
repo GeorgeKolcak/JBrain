@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JBrainWarlightBot.JBrain
+namespace JBrainBot.JBrain
 {
-    class Neuron //This thing should be capable of learning
+    class Neuron
     {
-        private Neuron[] inputs;
-        private double[] weights;
+        protected IDictionary<Neuron, double> Weights { get; private set; }
 
         public string ID { get; private set; }
 
@@ -20,16 +19,32 @@ namespace JBrainWarlightBot.JBrain
         {
             ID = id;
 
-            this.inputs = inputs.ToArray();
-
-            weights = Enumerable.Range(0, inputs.Count()).Select(_ => JRandom.RandomDouble()).ToArray();
+            Weights = inputs.ToDictionary(input => input, _ => JRandom.RandomDouble());
         }
 
         public virtual void Compute()
         {
-            double innerState = inputs.Zip(weights, (neuron, weight) => (neuron.Value * weight)).Sum();
+            double innerState = Weights.Keys.Select(input => input.Value * Weights[input]).Sum();
 
-            Value = (1.79 * Math.Pow(innerState, 0.3125));
+            Value = (1 / (1 + Math.Pow(Math.E, -innerState)));
+        }
+
+        
+
+        public override bool Equals(object obj)
+        {
+            Neuron other;
+            if ((other = obj as Neuron) == null)
+            {
+                return false;
+            }
+
+            return (ID == other.ID);
+        }
+
+        public override int GetHashCode()
+        {
+            return (131 + (37 * ID.GetHashCode()));
         }
     }
 }

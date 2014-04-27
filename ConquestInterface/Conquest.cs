@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JBrainWarlightBot
+namespace ConquestInterface
 {
     using Field;
 
-    class Conquest
+    public class Conquest
     {
         private IBot bot;
 

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JBrainWarlightBot.Field
+namespace ConquestInterface.Field
 {
-    class Adjacency : IEnumerable<Region>
+    public class Adjacency : IEnumerable<Region>
     {
         private Region[] regions;
 

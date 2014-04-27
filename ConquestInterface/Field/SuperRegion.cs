@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JBrainWarlightBot.Field
+namespace ConquestInterface.Field
 {
-    class SuperRegion : IEnumerable<Region>
+    public class SuperRegion : IEnumerable<Region>
     {
         public IEnumerable<Region> Regions
         {

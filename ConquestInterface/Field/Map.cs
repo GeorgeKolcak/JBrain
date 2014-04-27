@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JBrainWarlightBot.Field
+namespace ConquestInterface.Field
 {
-    class Map : IEnumerable<Region>
+    public class Map : IEnumerable<Region>
     {
         private Region[] regions;
 

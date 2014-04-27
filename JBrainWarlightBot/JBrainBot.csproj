@@ -7,8 +7,8 @@
     <ProjectGuid>{4C143955-ECBE-46FB-9B41-D01917F3306A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JBrainWarlightBot</RootNamespace>
-    <AssemblyName>JBrainWarlightBot</AssemblyName>
+    <RootNamespace>JBrainBot</RootNamespace>
+    <AssemblyName>JBrainBot</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,26 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BotCommunicationInterface.cs" />
-    <Compile Include="Conquest.cs" />
-    <Compile Include="EngineCommunicationInterface.cs" />
-    <Compile Include="Field\Adjacency.cs" />
-    <Compile Include="Field\Map.cs" />
-    <Compile Include="Field\Region.cs" />
-    <Compile Include="Field\SuperRegion.cs" />
-    <Compile Include="IBot.cs" />
     <Compile Include="JBrainBot.cs" />
     <Compile Include="JBrain\InputNeuron.cs" />
     <Compile Include="JBrain\JBrainNetwork.cs" />
     <Compile Include="JBrain\Neuron.cs" />
-    <Compile Include="Moves\Movement.cs" />
-    <Compile Include="Moves\Placement.cs" />
-    <Compile Include="OpponentMockBot.cs" />
+    <Compile Include="JBrain\OutputNeuron.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConquestInterface\ConquestInterface.csproj">
+      <Project>{e52ae947-f4f4-40d1-8944-4fbf225c8540}</Project>
+      <Name>ConquestInterface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
