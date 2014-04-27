@@ -20,8 +20,6 @@ namespace JBrainBot
 
         public JBrainBot()
         {
-            brain = new JBrainNetwork(0.05, 0.1, Conquest.Instance.Map);
-
             possibleMoves = new Dictionary<FictiveMove, double>();
 
             bestMove = null;
@@ -29,6 +27,8 @@ namespace JBrainBot
 
         public void ChoseStartingRegions(IEnumerable<Region> availableRegions)
         {
+            brain = new JBrainNetwork(0.05, 0.1, Conquest.Instance.Map);
+
             Conquest.Instance.Bot.RegisterStartingRegions(availableRegions.Take(6));
         }
 
