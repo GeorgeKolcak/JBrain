@@ -45,12 +45,12 @@ namespace ConquestInterface.Field
 
         public IEnumerator<Region> GetEnumerator()
         {
-            return GetEnumerator();
+            return Regions.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return Regions.GetEnumerator();
+            return ((IEnumerable)Regions).GetEnumerator();
         }
 
         public override string ToString()

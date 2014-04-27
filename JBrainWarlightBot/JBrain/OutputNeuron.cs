@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace JBrainBot.JBrain
 {
@@ -16,15 +17,32 @@ namespace JBrainBot.JBrain
             gradientSum = inputs.ToDictionary(input => input, _ => 0.0);
         }
 
+        public OutputNeuron(string id, IDictionary<Neuron, double> weightedInputs)
+            : base(id, weightedInputs)
+        {
+            gradientSum = weightedInputs.Keys.ToDictionary(input => input, _ => 0.0);
+        }
+
         public void UpdateWeights(double learningRate, double lambda, double formerPrediction, double prediction)
         {
-            foreach (Neuron input in Weights.Keys)
-            {
-                Weights[input] += (learningRate * (prediction - formerPrediction) * gradientSum[input]);
+            IEnumerable<Neuron> inputs = WeightedInputs.Keys.ToList();
 
-                gradientSum[input] = ((gradientSum[input] * lambda) + ((input.Value * Math.Pow(Math.E, Weights.Keys.Select(i => i.Value * Weights[i]).Sum())) /
-                    Math.Pow((Math.Pow(Math.E, Weights.Keys.Where(i => (i != input)).Select(i => i.Value * Weights[i]).Sum()) + Math.Pow(Math.E, input.Value * Weights[input])), 2)));
+            foreach (Neuron input in inputs)
+            {
+                WeightedInputs[input] += (learningRate * (prediction - formerPrediction) * gradientSum[input]);
+
+                gradientSum[input] = ((gradientSum[input] * lambda) + ((input.Value * Math.Pow(Math.E, WeightedInputs.Keys.Select(i => i.Value * WeightedInputs[i]).Sum())) /
+                    Math.Pow((Math.Pow(Math.E, WeightedInputs.Keys.Where(i => (i != input)).Select(i => i.Value * WeightedInputs[i]).Sum()) + Math.Pow(Math.E, input.Value * WeightedInputs[input])), 2)));
             }
+        }
+
+        public override XElement Save()
+        {
+            XElement elem = base.Save();
+
+            elem.Name = "OutputNeuron";
+
+            return elem;
         }
     }
 }

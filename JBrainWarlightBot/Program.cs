@@ -1,4 +1,5 @@
-﻿using ConquestInterface;
+﻿using JStudios.JExtensions;
+using ConquestInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace JBrainBot
     {
         static void Main(string[] args)
         {
-            Conquest.CreateInstance(new JBrainBot());
+            Conquest.CreateInstance(new JBrainBot(args.IsEmptyOrNullFilled() ? "ANONYMOUS" : args[0]));
 
             EngineCommunicationInterface ci = new EngineCommunicationInterface();
 

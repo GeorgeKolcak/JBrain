@@ -18,17 +18,17 @@ namespace ConquestInterface.Field
 
         public Region Other(Region region)
         {
-            return ((regions[0].ID == region.ID) ? regions[0] : regions[1]);
+            return ((regions[0].ID == region.ID) ? regions[1] : regions[0]);
         }
 
         public IEnumerator<Region> GetEnumerator()
         {
-            return GetEnumerator();
+            return ((IEnumerable<Region>)regions).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return regions.GetEnumerator();
+            return ((IEnumerable)regions).GetEnumerator();
         }
     }
 }

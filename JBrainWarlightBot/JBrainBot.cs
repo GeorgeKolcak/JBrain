@@ -14,12 +14,15 @@ namespace JBrainBot
     class JBrainBot : IBot
     {
         private JBrainNetwork brain;
+        private string id;
 
         private IDictionary<FictiveMove, double> possibleMoves;
         FictiveMove bestMove;
 
-        public JBrainBot()
+        public JBrainBot(string id)
         {
+            this.id = id;
+
             possibleMoves = new Dictionary<FictiveMove, double>();
 
             bestMove = null;
@@ -27,7 +30,7 @@ namespace JBrainBot
 
         public void ChoseStartingRegions(IEnumerable<Region> availableRegions)
         {
-            brain = new JBrainNetwork(0.05, 0.1, Conquest.Instance.Map);
+            brain = new JBrainNetwork(id, 0.05, 0.1, Conquest.Instance.Map);
 
             Conquest.Instance.Bot.RegisterStartingRegions(availableRegions.Take(6));
         }
@@ -36,7 +39,12 @@ namespace JBrainBot
         {
             IEnumerable<Region> frontline = Conquest.Instance.Map.Where(region => ((region.Owner == Conquest.Instance.Bot.ID) && region.Neighbours.Any(neigh => (neigh.Owner != Conquest.Instance.Bot.ID))));
 
-            for (int i = 0; i < 1000; i++)
+            if (frontline.IsEmpty())
+            {
+                frontline = Conquest.Instance.Map.Where(region => ((region.Owner == Conquest.Instance.Bot.ID)));
+            }
+
+            for (int i = 0; i < 256; i++)
             {
                 FictiveMove move = new FictiveMove(Conquest.Instance.Map);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JStudios.JExtensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,26 +52,26 @@ namespace ConquestInterface
                             {
                                 Conquest.Instance.Bot.PromptArmyPlacement(Int64.Parse(commands[2]));
 
-                                if (Conquest.Instance.Bot.ArmyPlacements.Count > 0)
+                                if (JLinq.IsNullOrEmpty(Conquest.Instance.Bot.ArmyPlacements))
                                 {
-                                    Console.WriteLine(String.Join(", ", Conquest.Instance.Bot.ArmyPlacements));
+                                    Console.WriteLine("No moves");
                                 }
                                 else
                                 {
-                                    Console.WriteLine("No moves");
+                                    Console.WriteLine(String.Join(", ", Conquest.Instance.Bot.ArmyPlacements)); 
                                 }
                             }
                             else if (commands[1] == "attack/transfer")
                             {
                                 Conquest.Instance.Bot.PromptArmyMovement(Int64.Parse(commands[2]));
 
-                                if (Conquest.Instance.Bot.ArmyMovements.Count > 0)
+                                if (JLinq.IsNullOrEmpty(Conquest.Instance.Bot.ArmyMovements))
                                 {
-                                    Console.WriteLine(String.Join(", ", Conquest.Instance.Bot.ArmyMovements));
+                                    Console.WriteLine("No moves");
                                 }
                                 else
                                 {
-                                    Console.WriteLine("No moves");
+                                    Console.WriteLine(String.Join(", ", Conquest.Instance.Bot.ArmyMovements));
                                 }
                             }
 
@@ -81,19 +82,50 @@ namespace ConquestInterface
                             IList<Placement> placements = new List<Placement>();
                             IList<Movement> movements = new List<Movement>();
 
-                            placements = commands.Where(command => (command.Split(',')[1] == "place_armies")).Select(command =>
+                            for (int i = 1; i < commands.Length; i++)
+                            {
+                                string bot = commands[i];
+                                i++;
+
+                                bool movement = (commands[i] == "attack/transfer");
+                                i++;
+
+                                Region region = Conquest.Instance.Map[Int32.Parse(commands[i])];
+                                i++;
+
+                                Region target = null;
+
+                                if (movement)
                                 {
-                                    string[] parts = command.Split(',');
+                                    target = Conquest.Instance.Map[Int32.Parse(commands[i])];
+                                    i++;
+                                }
 
-                                    return new Placement(parts[0], Conquest.Instance.Map[Int32.Parse(parts[2])], Int32.Parse(parts[3]));
-                                }).ToList();
+                                int armies = Int32.Parse(commands[i]);
 
-                            movements = commands.Where(command => (command.Split(',')[1] == "attack/transfer")).Select(command =>
+                                if (movement)
                                 {
-                                    string[] parts = command.Split(',');
+                                    movements.Add(new Movement(bot, region, target, armies));
+                                }
+                                else
+                                {
+                                    placements.Add(new Placement(bot, region, armies));
+                                }
+                            }
 
-                                    return new Movement(parts[0], Conquest.Instance.Map[Int32.Parse(parts[2])], Conquest.Instance.Map[Int32.Parse(parts[3])], Int32.Parse(parts[4]));
-                                }).ToList();
+                            //    placements = commands.Skip(1).Where(command => (command.Split(',')[1] == "place_armies")).Select(command =>
+                            //        {
+                            //            string[] parts = command.Split(',');
+
+                            //            return new Placement(parts[0], Conquest.Instance.Map[Int32.Parse(parts[2])], Int32.Parse(parts[3]));
+                            //        }).ToList();
+
+                            //movements = commands.Skip(1).Where(command => (command.Split(',')[1] == "attack/transfer")).Select(command =>
+                            //    {
+                            //        string[] parts = command.Split(',');
+
+                            //        return new Movement(parts[0], Conquest.Instance.Map[Int32.Parse(parts[2])], Conquest.Instance.Map[Int32.Parse(parts[3])], Int32.Parse(parts[4]));
+                            //    }).ToList();
 
                             Conquest.Instance.Opponent.RegisterPlacements(placements);
                             Conquest.Instance.Opponent.RegisterMovements(movements);
@@ -107,7 +139,10 @@ namespace ConquestInterface
                         {
                             Conquest.Instance.Bot.PromptStartingRegionsChoice(Int64.Parse(commands[1]), commands.Skip(2).Select(id => Conquest.Instance.Map[Int32.Parse(id)]));
 
-                            Console.WriteLine(String.Join(" ", Conquest.Instance.Bot.ChosenStartingRegions));
+                            if (!JLinq.IsNullOrEmpty(Conquest.Instance.Bot.ChosenStartingRegions))
+                            {
+                                Console.WriteLine(String.Join(" ", Conquest.Instance.Bot.ChosenStartingRegions));
+                            }
 
                             break;
                         }
@@ -215,25 +250,25 @@ namespace ConquestInterface
                                 region.FOW = true;
                             }
 
-                            int[] ids = new int[(commands.Length / 3)];
-                            string[] owners = new string[(commands.Length / 3)];
-                            int[] armies = new int[(commands.Length / 3)];
+                            int[] ids = new int[((commands.Length - 1) / 3)];
+                            string[] owners = new string[((commands.Length - 1) / 3)];
+                            int[] armies = new int[((commands.Length - 1) / 3)];
 
                             for (int i = 1; i < commands.Length; i++)
                             {
-                                if ((i % 2) == 0)
+                                if ((i % 3) == 0)
                                 {
-                                    armies[(i / 3)] = Int32.Parse(commands[i]);
+                                    armies[((i - 1) / 3)] = Int32.Parse(commands[i]);
                                 }
 
-                                if ((i % 2) == 1)
+                                if ((i % 3) == 1)
                                 {
-                                    ids[(i / 3)] = Int32.Parse(commands[i]);
+                                    ids[((i - 1) / 3)] = Int32.Parse(commands[i]);
                                 }
 
-                                if ((i % 2) == 2)
+                                if ((i % 3) == 2)
                                 {
-                                    owners[(i / 3)] = commands[i];
+                                    owners[((i - 1) / 3)] = commands[i];
                                 }
                             }
 

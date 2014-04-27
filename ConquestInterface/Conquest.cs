@@ -38,7 +38,7 @@ namespace ConquestInterface
 
         public void IdentifyOpponent(string id)
         {
-            Bot = new OpponentMockBot(id);
+            Opponent = new OpponentMockBot(id);
         }
     }
 }

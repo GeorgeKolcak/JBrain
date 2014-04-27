@@ -61,17 +61,17 @@ namespace ConquestInterface
             bot.PlaceArmies();
         }
 
-        public void RegisterPlacement(Placement placement)
+        public virtual void RegisterPlacement(Placement placement)
         {
             ArmyPlacements.Add(placement);
         }
 
-        public void RegisterPlacements(params Placement[] placements)
+        public virtual void RegisterPlacements(params Placement[] placements)
         {
             RegisterPlacements(placements);
         }
 
-        public void RegisterPlacements(IEnumerable<Placement> placements)
+        public virtual void RegisterPlacements(IEnumerable<Placement> placements)
         {
             foreach (Placement placement in placements)
             {
@@ -86,17 +86,17 @@ namespace ConquestInterface
             bot.MoveArmies();
         }
 
-        public void RegisterMovement(Movement movement)
+        public virtual void RegisterMovement(Movement movement)
         {
             ArmyMovements.Add(movement);
         }
-
-        public void RegisterMovements(params Movement[] movements)
+        
+        public virtual void RegisterMovements(params Movement[] movements)
         {
             RegisterMovements(movements);
         }
 
-        public void RegisterMovements(IEnumerable<Movement> movements)
+        public virtual void RegisterMovements(IEnumerable<Movement> movements)
         {
             foreach (Movement movement in movements)
             {

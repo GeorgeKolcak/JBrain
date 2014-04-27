@@ -20,6 +20,9 @@ namespace JBrainBot
         {
             armies = map.ToDictionary(region => region, region => new FictiveRegion(region.Armies,
                 ((region.Owner == Conquest.Instance.Bot.ID) ? 1.0 : ((region.Owner == Conquest.Instance.Opponent.ID) ? (region.FOW ? -0.8 : -1.0) : 0.0))));
+
+            Placements = new List<Placement>();
+            Movements = new List<Movement>();
         }
 
         public void AddPlacement(Placement placement)
@@ -60,7 +63,9 @@ namespace JBrainBot
 
         public IDictionary<string, double> NetworkInput()
         {
-            return armies.Keys.Select(region => new { ID = String.Format("ARMIES_{0}", region.ID), Value = armies[region].Armies })
+            double armyCount = armies.Keys.Select(region => armies[region].Armies).Sum();
+
+            return armies.Keys.Select(region => new { ID = String.Format("ARMIES_{0}", region.ID), Value = (armies[region].Armies / armyCount) })
                 .Concat(armies.Keys.Select(region => new { ID = String.Format("OWNER_{0}", region.ID), Value = armies[region].Info }))
                 .ToDictionary(data => data.ID, data => data.Value);
         }

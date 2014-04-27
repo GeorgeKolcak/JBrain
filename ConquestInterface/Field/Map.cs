@@ -17,8 +17,8 @@ namespace ConquestInterface.Field
 
         public Region this[int i]
         {
-            get { return regions[i]; }
-            set { regions[i] = value; }
+            get { return regions[i - 1]; }
+            set { regions[i - 1] = value; }
         }
 
         public IEnumerable<Region> VisibleRegions()
@@ -53,12 +53,12 @@ namespace ConquestInterface.Field
 
         public IEnumerator<Region> GetEnumerator()
         {
-            return GetEnumerator();
+            return ((IEnumerable<Region>)regions).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return regions.GetEnumerator();
+            return ((IEnumerable)regions).GetEnumerator();
         }
     }
 }
