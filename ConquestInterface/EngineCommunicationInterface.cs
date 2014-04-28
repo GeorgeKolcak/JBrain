@@ -253,6 +253,12 @@ namespace ConquestInterface
                             foreach (Region region in Conquest.Instance.Map)
                             {
                                 region.FOW = true;
+
+                                if (region.Owner == Conquest.Instance.Bot.ID)
+                                {
+                                    region.Owner = Conquest.Instance.Opponent.ID;
+                                    region.Armies = 1;
+                                }
                             }
 
                             int[] ids = new int[((commands.Length - 1) / 3)];
