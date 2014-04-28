@@ -37,14 +37,14 @@ namespace JBrainBot
 
         public void PlaceArmies()
         {
-            IEnumerable<Region> frontline = Conquest.Instance.Map.Where(region => ((region.Owner == Conquest.Instance.Bot.ID) && region.Neighbours.Any(neigh => (neigh.Owner != Conquest.Instance.Bot.ID))));
+            Region[] frontline = Conquest.Instance.Map.Where(region => ((region.Owner == Conquest.Instance.Bot.ID) && region.Neighbours.Any(neigh => (neigh.Owner != Conquest.Instance.Bot.ID)))).ToArray();
 
             if (frontline.IsEmpty())
             {
-                frontline = Conquest.Instance.Map.Where(region => ((region.Owner == Conquest.Instance.Bot.ID)));
+                frontline = Conquest.Instance.Map.Where(region => ((region.Owner == Conquest.Instance.Bot.ID))).ToArray();
             }
 
-            for (int i = 0; i < 256; i++)
+            for (int i = 0; i < 2048; i++)
             {
                 FictiveMove move = new FictiveMove(Conquest.Instance.Map);
 

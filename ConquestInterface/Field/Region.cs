@@ -17,11 +17,18 @@ namespace ConquestInterface.Field
 
         public bool FOW { get; set; }
 
+        private Region[] _neighbours;
+
         public IEnumerable<Region> Neighbours
         {
             get
             {
-                return Conquest.Instance.Map.Adjacencies.Where(adjacency => adjacency.Contains(this)).Select(adjacency => adjacency.Other(this));
+                if (_neighbours == null)
+                {
+                    _neighbours = Conquest.Instance.Map.Adjacencies.Where(adjacency => adjacency.Contains(this)).Select(adjacency => adjacency.Other(this)).ToArray();
+                }
+
+                return _neighbours;
             }
         }
 
