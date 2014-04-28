@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JBrainBot", "JBrainWarlightBot\JBrainBot.csproj", "{4C143955-ECBE-46FB-9B41-D01917F3306A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConquestInterface", "ConquestInterface\ConquestInterface.csproj", "{E52AE947-F4F4-40D1-8944-4FBF225C8540}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JBrainBot", "JBrainBot\JBrainBot.csproj", "{4C143955-ECBE-46FB-9B41-D01917F3306A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4C143955-ECBE-46FB-9B41-D01917F3306A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C143955-ECBE-46FB-9B41-D01917F3306A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C143955-ECBE-46FB-9B41-D01917F3306A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C143955-ECBE-46FB-9B41-D01917F3306A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E52AE947-F4F4-40D1-8944-4FBF225C8540}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E52AE947-F4F4-40D1-8944-4FBF225C8540}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E52AE947-F4F4-40D1-8944-4FBF225C8540}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E52AE947-F4F4-40D1-8944-4FBF225C8540}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C143955-ECBE-46FB-9B41-D01917F3306A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C143955-ECBE-46FB-9B41-D01917F3306A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C143955-ECBE-46FB-9B41-D01917F3306A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C143955-ECBE-46FB-9B41-D01917F3306A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
