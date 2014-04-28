@@ -81,6 +81,8 @@ namespace JBrainBot
 
             brain.NextMove(possibleMoves[bestMove]);
 
+            possibleMoves.Clear();
+
             bestMove = null;
         }
     }

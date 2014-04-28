@@ -186,31 +186,36 @@ namespace ConquestInterface
                             {
                                 case "neighbors":
                                     {
-                                        IEnumerable<int>[] neighbours = new IEnumerable<int>[(commands.Length / 2) - 1];
+                                        int[] ids = new int[((commands.Length - 2) / 2)];
+                                        IEnumerable<int>[] neighbours = new IEnumerable<int>[((commands.Length - 2) / 2)];
 
                                         for (int i = 2; i < commands.Length; i++)
                                         {
                                             if ((i % 2) == 0)
                                             {
-                                                neighbours[(i / 2) - 1] = commands[i].Split(',').Select(id => Int32.Parse(id));
+                                                ids[((i - 2) / 2)] = Int32.Parse(commands[i]);
+                                            }
+                                            else
+                                            {
+                                                neighbours[((i - 2) / 2)] = commands[i].Split(',').Select(id => Int32.Parse(id));
                                             }
                                         }
 
-                                        Conquest.Instance.Map.RegisterAdjacencies(Enumerable.Range(1, neighbours.Length)
-                                            .Zip(neighbours, (index, neighs) => new {Index = index, Neighbours = neighs})
-                                            .SelectMany(adjacencies => adjacencies.Neighbours.Select(neigh => new Adjacency(Conquest.Instance.Map[adjacencies.Index], Conquest.Instance.Map[neigh]))));
+                                        Conquest.Instance.Map.RegisterAdjacencies(ids
+                                            .Zip(neighbours, (id, neighs) => new {ID = id, Neighbours = neighs})
+                                            .SelectMany(adjacencies => adjacencies.Neighbours.Select(neigh => new Adjacency(Conquest.Instance.Map[adjacencies.ID], Conquest.Instance.Map[neigh]))));
 
                                         break;
                                     }
                                 case "regions":
                                     {
-                                        int[] supers = new int[(commands.Length / 2) - 1];
+                                        int[] supers = new int[((commands.Length - 2) / 2)];
 
                                         for (int i = 2; i < commands.Length; i++)
                                         {
-                                            if ((i % 2) == 0)
+                                            if ((i % 2) == 1)
                                             {
-                                                supers[(i / 2) - 1] = Int32.Parse(commands[i]);
+                                                supers[((i - 2) / 2)] = Int32.Parse(commands[i]);
                                             }
                                         }
 
@@ -220,11 +225,11 @@ namespace ConquestInterface
                                     }
                                 case "super_regions":
                                     {
-                                        int[] rewards = new int[(commands.Length / 2) - 1];
+                                        int[] rewards = new int[((commands.Length - 2) / 2)];
 
                                         for (int i = 2; i < commands.Length; i++)
                                         {
-                                            if ((i % 2) == 0)
+                                            if ((i % 2) == 1)
                                             {
                                                 rewards[(i / 2) - 1] = Int32.Parse(commands[i]);
                                             }
@@ -268,7 +273,7 @@ namespace ConquestInterface
 
                                 if ((i % 3) == 2)
                                 {
-                                    owners[((i - 1) / 3)] = commands[i];
+                                    owners[((i - 1) / 3)] = ((commands[i] == "neutral") ? null : commands[i]);
                                 }
                             }
 
