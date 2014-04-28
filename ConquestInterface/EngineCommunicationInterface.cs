@@ -257,8 +257,9 @@ namespace ConquestInterface
                                 if (region.Owner == Conquest.Instance.Bot.ID)
                                 {
                                     region.Owner = Conquest.Instance.Opponent.ID;
-                                    region.Armies = 1;
                                 }
+
+                                region.Armies = 1;
                             }
 
                             int[] ids = new int[((commands.Length - 1) / 3)];
