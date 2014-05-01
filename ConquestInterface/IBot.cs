@@ -14,5 +14,6 @@ namespace ConquestInterface
         void ChoseStartingRegions(IEnumerable<Region> availableRegions);
         void PlaceArmies();
         void MoveArmies();
+        void End();
     }
 }
